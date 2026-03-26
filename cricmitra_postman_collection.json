@@ -1,0 +1,191 @@
+{
+	"info": {
+		"_postman_id": "cricmitra-id-1234",
+		"name": "CricMitra API",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Auth",
+			"item": [
+				{
+					"name": "Register User",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"name\": \"John Doe\",\n    \"email\": \"john@example.com\",\n    \"password\": \"password123\",\n    \"phone\": \"1234567890\"\n}"
+						},
+						"url": {
+							"raw": "{{baseUrl}}/api/auth/register",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"api",
+								"auth",
+								"register"
+							]
+						}
+					}
+				},
+				{
+					"name": "Login User",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"email\": \"john@example.com\",\n    \"password\": \"password123\"\n}"
+						},
+						"url": {
+							"raw": "{{baseUrl}}/api/auth/login",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"api",
+								"auth",
+								"login"
+							]
+						}
+					}
+				}
+			]
+		},
+		{
+			"name": "Teams",
+			"item": [
+				{
+					"name": "Create Team",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{token}}"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"name\": \"Mumbai Indians\",\n    \"shortName\": \"MI\",\n    \"captainId\": \"player_object_id_here\"\n}"
+						},
+						"url": {
+							"raw": "{{baseUrl}}/api/teams",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"api",
+								"teams"
+							]
+						}
+					}
+				}
+			]
+		},
+		{
+			"name": "Matches",
+			"item": [
+				{
+					"name": "Create Match",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{token}}"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"teamAId\": \"team1_id\",\n    \"teamBId\": \"team2_id\",\n    \"venue\": \"Wankhede Stadium\",\n    \"matchDate\": \"2024-05-20T14:00:00Z\",\n    \"overs\": 20\n}"
+						},
+						"url": {
+							"raw": "{{baseUrl}}/api/matches",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"api",
+								"matches"
+							]
+						}
+					}
+				}
+			]
+		},
+		{
+			"name": "Scoring",
+			"item": [
+				{
+					"name": "Add Ball",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{token}}"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"inningsId\": \"innings_id\",\n    \"overNumber\": 1,\n    \"ballNumber\": 1,\n    \"bowlerId\": \"bowler_id\",\n    \"batsmanId\": \"batsman_id\",\n    \"nonStrikerId\": \"non_striker_id\",\n    \"runsBat\": 4,\n    \"extras\": {\n        \"type\": \"none\",\n        \"runs\": 0\n    },\n    \"isWicket\": false\n}"
+						},
+						"url": {
+							"raw": "{{baseUrl}}/api/scoring/:matchId/ball",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"api",
+								"scoring",
+								":matchId",
+								"ball"
+							],
+							"variable": [
+								{
+									"key": "matchId",
+									"value": "match_id_here"
+								}
+							]
+						}
+					}
+				}
+			]
+		}
+	],
+	"variable": [
+		{
+			"key": "baseUrl",
+			"value": "http://localhost:3000"
+		},
+		{
+			"key": "token",
+			"value": "your_jwt_token_here"
+		}
+	]
+}
