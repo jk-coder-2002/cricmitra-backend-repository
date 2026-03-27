@@ -10,18 +10,24 @@ export const setupSockets = (server: HttpServer) => {
   io.on('connection', (socket) => {
     logger.info(`User connected: ${socket.id}`);
 
-    // Join Match Room for Live Scoring
+    // Match Room
     socket.on('join_match', (matchId: string) => {
       socket.join(matchId);
       logger.info(`Socket ${socket.id} joined match room ${matchId}`);
     });
 
-    socket.on('leave_match', (matchId: string) => {
-      socket.leave(matchId);
-      logger.info(`Socket ${socket.id} left match room ${matchId}`);
+    // Auction Room
+    socket.on('join_auction', (auctionId: string) => {
+      socket.join(`auction_${auctionId}`);
+      logger.info(`Socket ${socket.id} joined auction room auction_${auctionId}`);
     });
 
-    // Join Personal Room for Notifications
+    socket.on('leave_auction', (auctionId: string) => {
+      socket.leave(`auction_${auctionId}`);
+      logger.info(`Socket ${socket.id} left auction room auction_${auctionId}`);
+    });
+
+    // User Room
     socket.on('join_user_room', (userId: string) => {
       socket.join(userId);
       logger.info(`Socket ${socket.id} joined user room ${userId}`);
@@ -32,7 +38,6 @@ export const setupSockets = (server: HttpServer) => {
     });
   });
 
-  // Attach io instance to global object to be accessible from controllers/services
   (global as any).io = io;
 };
 

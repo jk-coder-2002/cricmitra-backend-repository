@@ -9,10 +9,12 @@ services:
       - NODE_ENV=development
       - PORT=3000
       - MONGO_URI=mongodb://mongo:27017/cricmitra?replicaSet=rs0
+      - REDIS_URI=redis://redis:6379
       - JWT_SECRET=supersecretjwtkey
       - JWT_REFRESH_SECRET=supersecretrefreshkey
     depends_on:
       - mongo
+      - redis
     volumes:
       - ./src:/usr/src/app/src
       - /usr/src/app/node_modules
@@ -30,5 +32,13 @@ services:
       timeout: 5s
       retries: 5
 
+  redis:
+    image: redis:alpine
+    ports:
+      - "6379:6379"
+    volumes:
+      - redis_data:/data
+
 volumes:
   mongo_data:
+  redis_data:

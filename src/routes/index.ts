@@ -10,6 +10,7 @@ import scoringRoutes from '../modules/scoring/scoring.routes';
 import notificationRoutes from '../modules/notification/notification.routes';
 import tournamentRoutes from '../modules/tournament/tournament.routes';
 import statsRoutes from '../modules/stats/stats.routes';
+import auctionRoutes from '../modules/auction/auction.routes';
 
 const router = Router();
 
@@ -28,5 +29,6 @@ router.use('/scoring', scoringRoutes);
 router.use('/notifications', notificationRoutes);
 router.use('/tournaments', tournamentRoutes);
 router.use('/stats', statsRoutes);
+router.use('/auction', auctionRoutes);
 
 export default router;
